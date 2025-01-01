@@ -11,7 +11,7 @@ build:
   number: 0
 
   script:
-    - if: win 
+    - if: win
       then: |
         cmake -GNinja ^
             -D BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
@@ -32,8 +32,8 @@ requirements:
 
 tests:
   - package_contents:
-      files: 
-        - ${{ "Library" if win }}/lib/cmake/nonrelocatable/nonrelocatableConfig.cmake
+      files:
+        - ${{ "Library/" if win }}lib/cmake/nonrelocatable/nonrelocatableConfig.cmake
   - script:
     - cmake-package-check nonrelocatable
     requirements:
