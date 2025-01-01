@@ -1,0 +1,8 @@
+c_compiler:
+  - ${{ "gcc" if linux }}
+  - ${{ "clang" if osx }}
+  - ${{ "vs2019" if win }}
+cxx_compiler:
+  - ${{ "gxx" if linux }}
+  - ${{ "clangxx" if osx }}
+  - ${{ "vs2019" if win }}

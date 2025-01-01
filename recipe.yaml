@@ -1,0 +1,52 @@
+context:
+  version: "0.0.1"
+
+
+
+package:
+  name: nonrelocatable
+  version: ${{ version }}
+
+build:
+  number: 0
+
+  script:
+    - if: win 
+      then: |
+        cmake -GNinja ^
+            -D BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+            %RECIPE_DIR%
+        ninja install
+      else: |
+        cmake -GNinja \
+              -DBUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=$PREFIX \
+              $RECIPE_DIR
+        ninja install
+
+
+
+requirements:
+  build:
+    - cmake
+    - ninja
+
+tests:
+  - package_contents:
+      files: 
+        - ${{ "Library" if win }}/lib/cmake/nonrelocatable/nonrelocatableConfig.cmake
+  - script:
+    - cmake-package-check nonrelocatable
+    requirements:
+      run:
+        - cmake-package-check
+        - ${{ compiler('c') }}
+        - ${{ compiler('cxx') }}
+
+about:
+  homepage: https://github.com/xtensor-stack/xtensor
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: The C++ tensor algebra library
+  description: Multi dimensional arrays with broadcasting and lazy computing
+  documentation: https://xtensor.readthedocs.io
+  repository: https://github.com/xtensor-stack/xtensor

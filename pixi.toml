@@ -1,0 +1,13 @@
+[project]
+authors = ["Silvio Traversaro <silvio@traversaro.it>"]
+channels = ["conda-forge"]
+description = "Add a short description here"
+name = "reproduce-rattler"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+reproduce = "rattler-build build -m ./conda_build_config.yaml"
+
+[dependencies]
+rattler-build = "*"
