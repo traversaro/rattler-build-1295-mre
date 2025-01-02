@@ -7,7 +7,10 @@ platforms = ["win-64", "linux-64", "osx-arm64"]
 version = "0.1.0"
 
 [tasks]
-reproduce = "rattler-build build -m ./conda_build_config.yaml"
+reproduce = "rattler-build build  -r ./rattler_build_recipe -m ./rattler_build_recipe/conda_build_config_rattler_build.yaml"
+reproduce-conda-build = "conda-build ./conda_build_recipe -m ./conda_build_recipe/conda_build_config_conda_build.yaml"
 
 [dependencies]
 rattler-build = "*"
+conda-build = "*"
+

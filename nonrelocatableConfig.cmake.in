@@ -1,9 +1,0 @@
-@PACKAGE_INIT@
-
-set(NON_RELOCATABLE_VARIABLE @CMAKE_INSTALL_PREFIX@)
-
-if(NOT EXISTS ${NON_RELOCATABLE_VARIABLE})
-    message(FATAL_ERROR "The variable NON_RELOCATABLE_VARIABLE has value ${NON_RELOCATABLE_VARIABLE} that is not an existing directory.")
-else()
-    message(STATUS "The variable NON_RELOCATABLE_VARIABLE has value ${NON_RELOCATABLE_VARIABLE} and this is an existing directory.")
-endif()

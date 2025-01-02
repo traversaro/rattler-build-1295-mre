@@ -15,12 +15,12 @@ build:
       then: |
         cmake -GNinja ^
             -D BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
-            %RECIPE_DIR%
+            %RECIPE_DIR%\..\src
         ninja install
       else: |
         cmake -GNinja \
               -DBUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=$PREFIX \
-              $RECIPE_DIR
+              $RECIPE_DIR/../src
         ninja install
 
 
@@ -29,13 +29,15 @@ requirements:
   build:
     - cmake
     - ninja
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
 
 tests:
   - package_contents:
       files:
         - ${{ "Library/" if win }}lib/cmake/nonrelocatable/nonrelocatableConfig.cmake
   - script:
-    - cmake-package-check nonrelocatable
+    - cmake-package-check --disable-double-find nonrelocatable
     requirements:
       run:
         - cmake-package-check

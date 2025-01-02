@@ -1,0 +1,18 @@
+@PACKAGE_INIT@
+
+set(NON_RELOCATABLE_VARIABLE @CMAKE_INSTALL_PREFIX@)
+
+# For debug, read and print the nonrelocatableRegularFile.txt
+set(FILE_PATH "${CMAKE_CURRENT_LIST_DIR}/nonrelocatableRegularFile.txt")
+file(READ "${FILE_PATH}" FILE_CONTENT)
+
+# Print the content to the console
+message(STATUS "Contents of ${FILE_PATH}:")
+message(STATUS "${FILE_CONTENT}")
+
+if(NOT EXISTS ${NON_RELOCATABLE_VARIABLE})
+    message(STATUS "The variable NON_RELOCATABLE_VARIABLE has value ${NON_RELOCATABLE_VARIABLE} that is not an existing directory.")
+    message(FATAL_ERROR "Error detected.")
+else()
+    message(STATUS "The variable NON_RELOCATABLE_VARIABLE has value ${NON_RELOCATABLE_VARIABLE} and this is an existing directory.")
+endif()
